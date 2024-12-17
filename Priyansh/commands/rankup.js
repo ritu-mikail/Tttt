@@ -105,7 +105,7 @@ module.exports.languages = {
 		"on": "on",
 		"off": "off",
 		"successText": "success notification rankup!",
-		"levelup": "{name}, আপনার চ্যাটিং লেবেল আপনি যতো বেশি মেসেজ করবেন আপনার লেবেল ততো বেশি থাকবে  {level}",
+		"levelup": "{name}, আপনার চ্যাটিং লেবেল {level}",
 	}
 }
 
