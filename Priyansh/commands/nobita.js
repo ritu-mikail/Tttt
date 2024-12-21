@@ -1,14 +1,15 @@
 /** I am doing this coding with a lot of difficulty, please don't post it yourself¯\_(ツ)_/¯ **/
 module.exports.config = {
-  name: "nobita",
-  version: "1.0.0",
-  hasPermssion: 0,
-  credits: "★𝐌𝟗𝐇𝟒𝐌𝐌𝟒𝐃-𝐁𝟒𝐃𝟗𝐋★",
-  description: "doremon cartoon video",
-  Sumi commandCategory: "cartoons",
-  usages: "nobita",
-  cooldowns: 5,
-  dependencies: {
+    name: "nobita",
+    version: "1.0.0",
+    hasPermission: 0,
+    credits: "000",
+    description: "Nobita Sad Video💔",
+    usePrefix: true,
+    commandCategory: "Khan Rahul RK",
+    usages: "Nobita Video ",
+    cooldowns: 5,
+    dependencies: {
     "request":"",
     "fs-extra":"",
     "axios":""
