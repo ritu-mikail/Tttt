@@ -1,39 +1,63 @@
-module.exports.config = {
-  name: "art",
-  version: "1.0.0",
-  hasPermssion: 0,
-  credits: "𝐏𝐫𝐢𝐲𝐚𝐧𝐬𝐡 𝐑𝐚𝐣𝐩𝐮𝐭",
-  description: "Animefy",
-  commandCategory: "editing",
-  usages: "reply image",
-  cooldowns: 5
+const axios = require('axios');
+
+const baseApiUrl = async () => {
+  const base = await axios.get(
+    `https://raw.githubusercontent.com/Blankid018/D1PT0/main/baseApiUrl.json`
+  );
+  return base.data.api;
 };
 
-module.exports.run = async ({ api, event, args }) => {
-  const axios = require('axios');
-  const fs = require('fs-extra');
-  let pathie = __dirname + `/cache/animefy.jpg`;
-  const { threadID, messageID } = event;
+module.exports = {
+  config: {
+    name: "art",
+    version: "1.6.9",
+    credits: "Nazrul",
+    hasPermssion: 0,
+    description: "{pn} - Enhance your photos with  artful transformations!",
+    prefix: true,
+    usePrefix: true,
+    commandCategory: "art",
+    cooldowns: 5,
+    usages:"{pn} reply to a image"
+  },
+  run: async function ({ message, event, args, api }) {
+    try {
+      const cp = ["bal","zombie","anime","ghost", "watercolor", "sketch", "abstract", "cartoon","monster"];
+      const prompts = args[0] || cp[Math.floor(Math.random() * cp.length)];
 
-  var james = event.messageReply.attachments[0].url || args.join(" ");
+      const msg = await api.sendMessage("🎨 Processing your image, please wait...", event.threadID);
 
- try {
-    const lim = await axios.get(`https://animeify.shinoyama.repl.co/convert-to-anime?imageUrl=${encodeURIComponent(james)}`);
-     const image = lim.data.urls[1];
+      let photoUrl = "";
 
-     const img = (await axios.get(`https://www.drawever.com${image}`, { responseType: "arraybuffer"})).data;
+      if (event.type === "message_reply" && event.messageReply?.attachments?.length > 0) {
+        photoUrl = event.messageReply.attachments[0].url;
+      } else if (args.length > 0) {
+        photoUrl = args.join(' ');
+      }
 
-     fs.writeFileSync(pathie, Buffer.from(img, 'utf-8'));
+      if (!photoUrl) {
+        return api.sendMessage("🔰 Please reply to an image or provide a URL!", event.threadID, event.messageID);
+      }
 
-     api.sendMessage({
-       body: "here's your image",
-       attachment: fs.createReadStream(pathie)
-     }, threadID, () => fs.unlinkSync(pathie), messageID);
+      const response = await axios.get(`${await baseApiUrl()}/art2?url=${encodeURIComponent(photoUrl)}&prompt=${encodeURIComponent(prompts)}`);
 
+      if (!response.data || !response.data.imageUrl) {
+        await api.sendMessage("⚠ Failed to return a valid image URL. Please try again.", event.threadID, event.messageID);
+        return;
+      }
 
+      const imageUrl = response.data.imageUrl;
+      await api.unsendMessage(msg.messageID);
 
-  } catch (e) {
-  api.sendMessage(`error occurred:\n\n${e}`, threadID, messageID);
-  };
+      const imageStream = await axios.get(imageUrl, { responseType: 'stream' });
 
+      await api.sendMessage({ 
+        body: `Here's your artful image! 🎨`, 
+        attachment: imageStream.data 
+      }, event.threadID, event.messageID);
+
+    } catch (error) {
+      await api.sendMessage(`Error: ${error.message}`, event.threadID, event.messageID);
+    }
+  }
 };
