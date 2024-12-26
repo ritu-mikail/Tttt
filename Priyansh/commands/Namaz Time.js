@@ -6,7 +6,7 @@ module.exports.config = {
   description: "prayer time",
   usePrefix: true,
   commandCategory: "Khan Rahul RK",
-  usages: "time",
+  usages: "namaz time",
     cooldowns: 5,
   dependencies: {
 };
