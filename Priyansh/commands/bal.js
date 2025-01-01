@@ -8,7 +8,7 @@ const link = [
 ];
  
 module.exports.config = {
-  name: "bal",
+  name: "বাল",
   version: "1.0.0",
   hasPermssion: 0,
   credits: "nazrul",
@@ -26,7 +26,7 @@ module.exports.config = {
 module.exports.handleEvent = async ({ api, event, Threads }) => {
   const content = event.body ? event.body : '';
     const body = content.toLowerCase();
-  if (body.startsWith("bal")) {
+  if (body.startsWith("বাল")) {
     const rahad = [
       "মাদারষুদ আমি মাদ্রাসায় পড়ি এখানে গালাগালি করবি না 👺😾"
     
