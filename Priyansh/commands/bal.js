@@ -3,12 +3,12 @@ const fs = require("fs");
 const request = require("request");
  
 const link = [
-  "",
+  "https://i.imgur.com/4KxOu8c.jpeg",
  
 ];
  
 module.exports.config = {
-  name: "বাল",
+  name: "bal",
   version: "1.0.0",
   hasPermssion: 0,
   credits: "nazrul",
@@ -26,7 +26,7 @@ module.exports.config = {
 module.exports.handleEvent = async ({ api, event, Threads }) => {
   const content = event.body ? event.body : '';
     const body = content.toLowerCase();
-  if (body.startsWith("বাল")) {
+  if (body.startsWith("bal")) {
     const rahad = [
       "মাদারষুদ আমি মাদ্রাসায় পড়ি এখানে গালাগালি করবি না 👺😾"
     
