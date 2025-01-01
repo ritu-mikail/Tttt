@@ -8,7 +8,7 @@ const link = [
 ];
  
 module.exports.config = {
-  name: "🤬😡😾",
+  name: "🤬",
   version: "1.0.0",
   hasPermssion: 0,
   credits: "nazrul",
@@ -26,7 +26,7 @@ module.exports.config = {
 module.exports.handleEvent = async ({ api, event, Threads }) => {
   const content = event.body ? event.body : '';
     const body = content.toLowerCase();
-  if (body.startsWith("🤬",😡","😾")) {
+  if (body.startsWith("🤬")) {
     const rahad = [
       "কিরে আবাল তুই রাগ কারে দেখাছ😾"
     
