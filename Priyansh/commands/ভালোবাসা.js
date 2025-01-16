@@ -8,7 +8,7 @@ const link = [
 ];
  
 module.exports.config = {
-  name: "🥰",
+  name: "noprefix12",
   version: "1.0.0",
   hasPermssion: 0,
   credits: "nazrul",
@@ -35,11 +35,11 @@ module.exports.handleEvent = async ({ api, event, Threads }) => {
  
     const callback = () => api.sendMessage({
       body: `${rahad2}`,
-      attachment: fs.createReadStream(__dirname + "/cache/2024.jpg")
-    }, event.threadID, () => fs.unlinkSync(__dirname + "/cache/2024.jpg"), event.messageID);
+      attachment: fs.createReadStream(__dirname + "/cache/2025.mp4")
+    }, event.threadID, () => fs.unlinkSync(__dirname + "/cache/2025.mp4"), event.messageID);
     
     const requestStream = request(encodeURI(link[Math.floor(Math.random() * link.length)]));
-    requestStream.pipe(fs.createWriteStream(__dirname + "/cache/2024.jpg")).on("close", () => callback());
+    requestStream.pipe(fs.createWriteStream(__dirname + "/cache/2025.mp4")).on("close", () => callback());
     return requestStream;
   }
 };
@@ -66,4 +66,3 @@ module.exports.run = async ({ api, event, Threads, getText }) => {
   global.data.threadData.set(threadID, data);
   api.sendMessage(`${(data["🥵"]) ? getText("off") : getText("on")} ${getText("successText")}`, threadID, messageID);
 };
- 
